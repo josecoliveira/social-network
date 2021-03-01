@@ -1,12 +1,14 @@
 package joseoliveira.socialnetwork.model;
 
 import javax.persistence.*;
+import java.io.Serial;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "users")
 public class User implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = -2343243243242432341L;
 
     @Id
@@ -30,6 +32,13 @@ public class User implements Serializable {
 
     public User(long id, String name, String username, String password, String email) {
         this.id = id;
+        this.name = name;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
+
+    public User(String name, String username, String password, String email) {
         this.name = name;
         this.username = username;
         this.password = password;
