@@ -11,7 +11,7 @@ public class Post implements Serializable {
     @Serial
     private static final long serialVersionUID = -2343243243242432341L;
 
-    @Column(name = "userId")
+    @Column(name = "user_id")
     private long userId;
 
     @Id

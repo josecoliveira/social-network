@@ -1,13 +1,13 @@
 package joseoliveira.socialnetwork.controller;
 
+import joseoliveira.socialnetwork.model.Comment;
 import joseoliveira.socialnetwork.model.Post;
-import joseoliveira.socialnetwork.model.User;
+import joseoliveira.socialnetwork.service.CommentService;
 import joseoliveira.socialnetwork.service.JwtUserDetailsService;
 import joseoliveira.socialnetwork.service.PostService;
 import joseoliveira.socialnetwork.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
@@ -26,11 +26,19 @@ public class PostController {
     private UserService userService;
 
     @Autowired
+    private CommentService commentService;
+
+    @Autowired
     private JwtUserDetailsService jwtUserDetailsService;
 
-    @GetMapping("/posts")
+    @GetMapping(value = "/posts", params = {})
     public List<Post> findAll() {
         return postService.findAll();
+    }
+
+    @GetMapping(value = "/posts", params = {"userId"})
+    public List<Post> findAllUserId(@RequestParam long userId) {
+        return postService.findAllUserId(userId);
     }
 
     @GetMapping("/posts/{id}")
@@ -41,19 +49,23 @@ public class PostController {
                     HttpStatus.NOT_FOUND, "Post not found"
             );
         }
-        return postService.findOneById(id);
+        return post;
     }
 
-    @GetMapping("/posts/userId/{userId}")
-    public List<Post> findAllUserId(@PathVariable long userId) {
-        return postService.findAllUserId(userId);
+    @GetMapping("/posts/{postId}/comments")
+    public List<Comment> findAllCommentsByPostId(@PathVariable long postId) {
+        if (postService.findOneById(postId) == null) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Post not found"
+            );
+        }
+        return commentService.findAllByPostId(postId);
     }
 
     @PostMapping("/posts")
     public Boolean save(@RequestBody Map<String, String> body) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         long userId = userService.findByUsername(userDetails.getUsername()).getId();
-        System.out.println(userId);
         String title = body.get("title");
         String postBody = body.get("body");
         postService.save(new Post(userId, title, postBody));

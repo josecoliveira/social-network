@@ -1,0 +1,285 @@
+{
+	"info": {
+		"_postman_id": "bc8c8be3-9b4a-4e14-8d4d-57e23967e5cc",
+		"name": "Social Network",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"jose\",\n    \"password\": \"jose\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/authenticate",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"jose\",\n    \"name\": \"José Oliveira\",\n    \"password\": \"jose\",\n    \"email\": \"josecarlosdeoliveirajr@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/user",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Post",
+			"item": [
+				{
+					"name": "Get all posts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb3NlIiwiZXhwIjoxNjE0NjUwNDU5LCJpYXQiOjE2MTQ2MzI0NTl9.E4G6Zw8vlfsG-SH1lOMIg0DM1-gQQtxUzLbi7SDAQppsLxVTf0h85MozAl6vWVS6enGOjShD8a-c-AOWbnMIxQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/posts",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get posts from a user",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb3NlIiwiZXhwIjoxNjE0NjUwNDU5LCJpYXQiOjE2MTQ2MzI0NTl9.E4G6Zw8vlfsG-SH1lOMIg0DM1-gQQtxUzLbi7SDAQppsLxVTf0h85MozAl6vWVS6enGOjShD8a-c-AOWbnMIxQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/posts?userId=2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"posts"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get post by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb3NlIiwiZXhwIjoxNjE0NjUwNDU5LCJpYXQiOjE2MTQ2MzI0NTl9.E4G6Zw8vlfsG-SH1lOMIg0DM1-gQQtxUzLbi7SDAQppsLxVTf0h85MozAl6vWVS6enGOjShD8a-c-AOWbnMIxQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/posts/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"posts",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb3NlIiwiZXhwIjoxNjE0NjQ5NzQ3LCJpYXQiOjE2MTQ2MzE3NDd9.GOoH26TtPnDUh1nI8oKJsgwo9nZ8jzwds3S1pEZ6-9dLLXF3s_gNRs7t2tlxvZw8QnSsu5zzofPAf8pXcJODrw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Post 1\",\n    \"body\": \"Body 1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/posts",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get comments by post id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb3NlIiwiZXhwIjoxNjE0NjU2ODA4LCJpYXQiOjE2MTQ2Mzg4MDh9.v03J5C3SmAakV-1e5_J3cweX4YcQXmfVFVt1-IwMLOPtbkw8H_GN0AcRI3jDogYFzD8G19L6XAl3-UTVuNeC7A",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/posts/1/comments",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"posts",
+								"1",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comments",
+			"item": [
+				{
+					"name": "Get all comments",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb3NlIiwiZXhwIjoxNjE0NjU2ODA4LCJpYXQiOjE2MTQ2Mzg4MDh9.v03J5C3SmAakV-1e5_J3cweX4YcQXmfVFVt1-IwMLOPtbkw8H_GN0AcRI3jDogYFzD8G19L6XAl3-UTVuNeC7A",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/comments",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get comment by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "Create comment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb3NlIiwiZXhwIjoxNjE0NjU2ODA4LCJpYXQiOjE2MTQ2Mzg4MDh9.v03J5C3SmAakV-1e5_J3cweX4YcQXmfVFVt1-IwMLOPtbkw8H_GN0AcRI3jDogYFzD8G19L6XAl3-UTVuNeC7A",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"postId\": 2,\n    \"userId\": 2,\n    \"body\": \"Lorem ipsum\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/comments",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"comments"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
