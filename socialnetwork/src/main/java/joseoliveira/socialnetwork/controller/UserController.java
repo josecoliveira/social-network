@@ -25,7 +25,6 @@ public class UserController {
         String password = body.get("password");
         String encodedPassword = new BCryptPasswordEncoder().encode(password);
         String email = body.get("email");
-        System.out.println("save");
         userService.save(new User(name, username, encodedPassword, email));
         return true;
     }
