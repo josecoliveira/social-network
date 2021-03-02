@@ -32,4 +32,8 @@ public class AlbumService {
     public void save(Album album) {
         albumRepository.save(album);
     }
+
+    public Boolean existsById(long id) {
+        return albumRepository.existsById(id);
+    }
 }

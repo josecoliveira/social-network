@@ -9,13 +9,40 @@
 			"name": "User",
 			"item": [
 				{
-					"name": "Login",
+					"name": "Login (jose)",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
 							"raw": "{\n    \"username\": \"jose\",\n    \"password\": \"jose\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/authenticate",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login (rafael)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"rafael\",\n    \"password\": \"rafael\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -462,6 +489,32 @@
 					"response": []
 				},
 				{
+					"name": "Get photo by album id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb3NlIiwiZXhwIjoxNjE0NjY1Njk3LCJpYXQiOjE2MTQ2NDc2OTd9.ykcmam7ae67QdBTQi0bSW4dIOc6qipE8ekwpN6Cfnfqvyfr3T1g4lSFKtQgJCp3rVVVcXMkakUhFp7T4lRrHkQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/album/1/photo",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"album",
+								"1",
+								"photo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Create album",
 					"request": {
 						"method": "POST",
@@ -489,6 +542,123 @@
 							"port": "8080",
 							"path": [
 								"album"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Photo",
+			"item": [
+				{
+					"name": "Get all photos",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb3NlIiwiZXhwIjoxNjE0NjY1Njk3LCJpYXQiOjE2MTQ2NDc2OTd9.ykcmam7ae67QdBTQi0bSW4dIOc6qipE8ekwpN6Cfnfqvyfr3T1g4lSFKtQgJCp3rVVVcXMkakUhFp7T4lRrHkQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/photo",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"photo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get photos by album id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb3NlIiwiZXhwIjoxNjE0NjY1Njk3LCJpYXQiOjE2MTQ2NDc2OTd9.ykcmam7ae67QdBTQi0bSW4dIOc6qipE8ekwpN6Cfnfqvyfr3T1g4lSFKtQgJCp3rVVVcXMkakUhFp7T4lRrHkQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/photo?albumId=2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"photo"
+							],
+							"query": [
+								{
+									"key": "albumId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create photo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYWZhZWwiLCJleHAiOjE2MTQ2NjU3MjIsImlhdCI6MTYxNDY0NzcyMn0.1IyNGWHWsBOOptFJEd5jyMDaNy10_Bkf4ppKYSpWcNYrT4nhjzggRz8D8fnQnpKhtQz9pkk1NEbqlZqHDhiD6A",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"albumId\": 2,\n    \"title\": \"Photo title 2\",\n    \"url\": \"url\",\n    \"thumbnailUrl\": \"url\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/photo",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"photo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get photo by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb3NlIiwiZXhwIjoxNjE0NjY1Njk3LCJpYXQiOjE2MTQ2NDc2OTd9.ykcmam7ae67QdBTQi0bSW4dIOc6qipE8ekwpN6Cfnfqvyfr3T1g4lSFKtQgJCp3rVVVcXMkakUhFp7T4lRrHkQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/photo/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"photo",
+								"1"
 							]
 						}
 					},

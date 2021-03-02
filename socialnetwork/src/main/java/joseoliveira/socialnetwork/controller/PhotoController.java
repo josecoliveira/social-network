@@ -1,6 +1,6 @@
 package joseoliveira.socialnetwork.controller;
 
-import joseoliveira.socialnetwork.model.Album;
+import joseoliveira.socialnetwork.model.Comment;
 import joseoliveira.socialnetwork.model.Photo;
 import joseoliveira.socialnetwork.service.AlbumService;
 import joseoliveira.socialnetwork.service.PhotoService;
@@ -16,7 +16,10 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-public class AlbumController {
+public class PhotoController {
+
+    @Autowired
+    private PhotoService photoService;
 
     @Autowired
     private AlbumService albumService;
@@ -24,53 +27,47 @@ public class AlbumController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private PhotoService photoService;
-
-    @GetMapping(value = "/album", params = {})
-    public List<Album> findAll() {
-        return albumService.findAll();
+    @GetMapping(value = "/photo", params = {})
+    public List<Photo> findAll() {
+        return photoService.findAll();
     }
 
-    @GetMapping(value = "/album", params = {"userId"})
-    public List<Album> findByUserId(@RequestParam long userId) {
-        if (!userService.existsById(userId)) {
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "User not found"
-            );
-        }
-        return albumService.findByUserId(userId);
-    }
-
-    @GetMapping("/album/{id}")
-    public Album findById(@PathVariable long id) {
-        Album album = albumService.findOneById(id);
-        if (album == null) {
+    @GetMapping(value = "/photo", params = {"albumId"})
+    public List<Photo> findByAlbumId(@RequestParam long albumId) {
+        if (!albumService.existsById(albumId)) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "Album not found"
             );
         }
-        return album;
+        return photoService.findAllByAlbumId(albumId);
     }
 
-    @GetMapping("/album/{id}/photo")
-    public List<Photo> findPhotosByAlbumId(@PathVariable long id) {
-        if (!albumService.existsById(id)) {
+    @GetMapping("/photo/{id}")
+    public Photo findOneById(@PathVariable long id) {
+        Photo photo = photoService.findOneById(id);
+        if (photo == null) {
             throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "Album not found"
+                    HttpStatus.NOT_FOUND, "Photo not found"
             );
         }
-        return photoService.findAllByAlbumId(id);
+        return photo;
     }
 
-    @PostMapping("/album")
+    @PostMapping("/photo")
     public Boolean save(@RequestBody Map<String, String> body) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         long userId = userService.findByUsername(userDetails.getUsername()).getId();
+        long albumId = Long.parseLong(body.get("albumId"));
         String title = body.get("title");
-        albumService.save(new Album(userId, title));
+        String url = body.get("url");
+        String thumbnailUrl = body.get("thumbnailUrl");
+        if (albumService.findOneById(albumId).getUserId() != userId) {
+            throw new ResponseStatusException(
+                    HttpStatus.UNAUTHORIZED, "User is not the owner of the album"
+            );
+        }
+        photoService.save(new Photo(albumId, title, url, thumbnailUrl));
         return true;
     }
-
 
 }
