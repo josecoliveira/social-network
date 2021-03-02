@@ -29,4 +29,13 @@ public class UserService {
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+
+    public Boolean existsById(long id) {
+        return userRepository.existsById(id);
+    }
+
+    public User findOneByUserId(long id) {
+        return userRepository.findOneById(id);
+    }
+
 }

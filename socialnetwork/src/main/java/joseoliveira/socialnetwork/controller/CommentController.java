@@ -2,6 +2,7 @@ package joseoliveira.socialnetwork.controller;
 
 import joseoliveira.socialnetwork.model.Comment;
 import joseoliveira.socialnetwork.service.CommentService;
+import joseoliveira.socialnetwork.service.PostService;
 import joseoliveira.socialnetwork.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,12 +23,25 @@ public class CommentController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/comments")
+    @Autowired
+    private PostService postService;
+
+    @GetMapping(value = "/comment", params = {})
     public List<Comment> findAll() {
         return commentService.findAll();
     }
 
-    @GetMapping("/comments/{id}")
+    @GetMapping(value = "/comment", params = {"postId"})
+    public List<Comment> findAllByPostId(@RequestParam long postId) {
+        if (postService.findOneById(postId) == null) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Post not found"
+            );
+        }
+        return commentService.findAllByPostId(postId);
+    }
+
+    @GetMapping("/comment/{id}")
     public Comment findOneById(@PathVariable long id) {
         Comment comment = commentService.findOneById(id);
         if (comment == null) {
@@ -38,7 +52,7 @@ public class CommentController {
         return comment;
     }
 
-    @PostMapping("/comments")
+    @PostMapping("/comment")
     public Boolean save(@RequestBody Map<String, String> body) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         long userId = userService.findByUsername(userDetails.getUsername()).getId();

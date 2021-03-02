@@ -61,6 +61,58 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get posts by user id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb3NlIiwiZXhwIjoxNjE0NjYyMzIwLCJpYXQiOjE2MTQ2NDQzMjB9.peWG9w9ofaJDV8CbjUhTZSQTZxRCfggnJXdmBvNE6moAKFbVQ6L1LWnxf48pJMUwCZa-EPKG56tFeZbdCnLUSw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/user/1/post",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"1",
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get albums by user id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb3NlIiwiZXhwIjoxNjE0NjYyMzIwLCJpYXQiOjE2MTQ2NDQzMjB9.peWG9w9ofaJDV8CbjUhTZSQTZxRCfggnJXdmBvNE6moAKFbVQ6L1LWnxf48pJMUwCZa-EPKG56tFeZbdCnLUSw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/user/2/album",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"2",
+								"album"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -79,20 +131,20 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/posts",
+							"raw": "localhost:8080/post",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"posts"
+								"post"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Get posts from a user",
+					"name": "Get posts by user id",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -103,13 +155,13 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/posts?userId=2",
+							"raw": "localhost:8080/post?userId=2",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"posts"
+								"post"
 							],
 							"query": [
 								{
@@ -133,14 +185,40 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/posts/2",
+							"raw": "localhost:8080/post/2",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"posts",
+								"post",
 								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get comments by post id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb3NlIiwiZXhwIjoxNjE0NjU2ODA4LCJpYXQiOjE2MTQ2Mzg4MDh9.v03J5C3SmAakV-1e5_J3cweX4YcQXmfVFVt1-IwMLOPtbkw8H_GN0AcRI3jDogYFzD8G19L6XAl3-UTVuNeC7A",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/post/1/comment",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"post",
+								"1",
+								"comment"
 							]
 						}
 					},
@@ -167,39 +245,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/posts",
+							"raw": "localhost:8080/post",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"posts"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get comments by post id",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb3NlIiwiZXhwIjoxNjE0NjU2ODA4LCJpYXQiOjE2MTQ2Mzg4MDh9.v03J5C3SmAakV-1e5_J3cweX4YcQXmfVFVt1-IwMLOPtbkw8H_GN0AcRI3jDogYFzD8G19L6XAl3-UTVuNeC7A",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "localhost:8080/posts/1/comments",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"posts",
-								"1",
-								"comments"
+								"post"
 							]
 						}
 					},
@@ -208,7 +260,7 @@
 			]
 		},
 		{
-			"name": "Comments",
+			"name": "Comment",
 			"item": [
 				{
 					"name": "Get all comments",
@@ -225,13 +277,43 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/comments",
+							"raw": "localhost:8080/comment",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"comments"
+								"comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get comments by post id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb3NlIiwiZXhwIjoxNjE0NjYyMzIwLCJpYXQiOjE2MTQ2NDQzMjB9.peWG9w9ofaJDV8CbjUhTZSQTZxRCfggnJXdmBvNE6moAKFbVQ6L1LWnxf48pJMUwCZa-EPKG56tFeZbdCnLUSw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/comment?postId=2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"comment"
+							],
+							"query": [
+								{
+									"key": "postId",
+									"value": "2"
+								}
 							]
 						}
 					},
@@ -241,8 +323,24 @@
 					"name": "Get comment by id",
 					"request": {
 						"method": "GET",
-						"header": [],
-						"url": null
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb3NlIiwiZXhwIjoxNjE0NjU2ODA4LCJpYXQiOjE2MTQ2Mzg4MDh9.v03J5C3SmAakV-1e5_J3cweX4YcQXmfVFVt1-IwMLOPtbkw8H_GN0AcRI3jDogYFzD8G19L6XAl3-UTVuNeC7A",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/comment/0",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"comment",
+								"0"
+							]
+						}
 					},
 					"response": []
 				},
@@ -267,13 +365,130 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/comments",
+							"raw": "localhost:8080/comment",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"comments"
+								"comment"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Album",
+			"item": [
+				{
+					"name": "Get all albums",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb3NlIiwiZXhwIjoxNjE0NjYyMzIwLCJpYXQiOjE2MTQ2NDQzMjB9.peWG9w9ofaJDV8CbjUhTZSQTZxRCfggnJXdmBvNE6moAKFbVQ6L1LWnxf48pJMUwCZa-EPKG56tFeZbdCnLUSw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/album",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"album"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get album by user id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb3NlIiwiZXhwIjoxNjE0NjYyMzIwLCJpYXQiOjE2MTQ2NDQzMjB9.peWG9w9ofaJDV8CbjUhTZSQTZxRCfggnJXdmBvNE6moAKFbVQ6L1LWnxf48pJMUwCZa-EPKG56tFeZbdCnLUSw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/album?userId=3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"album"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get album by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb3NlIiwiZXhwIjoxNjE0NjYyMzIwLCJpYXQiOjE2MTQ2NDQzMjB9.peWG9w9ofaJDV8CbjUhTZSQTZxRCfggnJXdmBvNE6moAKFbVQ6L1LWnxf48pJMUwCZa-EPKG56tFeZbdCnLUSw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/album/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"album",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create album",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYWZhZWwiLCJleHAiOjE2MTQ2NjIyMDMsImlhdCI6MTYxNDY0NDIwM30.bi4yiz2K7tadxPrwewi-Q-WLlwiYHDI-twsWnRdSjgR62F7Xk50Zc5l5hB3zhdCDY3cZ-cOXOimnZMAMJs_kbQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Title 2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/album",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"album"
 							]
 						}
 					},

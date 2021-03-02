@@ -3,7 +3,6 @@ package joseoliveira.socialnetwork.controller;
 import joseoliveira.socialnetwork.model.Comment;
 import joseoliveira.socialnetwork.model.Post;
 import joseoliveira.socialnetwork.service.CommentService;
-import joseoliveira.socialnetwork.service.JwtUserDetailsService;
 import joseoliveira.socialnetwork.service.PostService;
 import joseoliveira.socialnetwork.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,20 +27,22 @@ public class PostController {
     @Autowired
     private CommentService commentService;
 
-    @Autowired
-    private JwtUserDetailsService jwtUserDetailsService;
-
-    @GetMapping(value = "/posts", params = {})
+    @GetMapping(value = "/post", params = {})
     public List<Post> findAll() {
         return postService.findAll();
     }
 
-    @GetMapping(value = "/posts", params = {"userId"})
+    @GetMapping(value = "/post", params = {"userId"})
     public List<Post> findAllUserId(@RequestParam long userId) {
-        return postService.findAllUserId(userId);
+        if (!userService.existsById(userId)) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "User not found"
+            );
+        }
+        return postService.findAllByUserId(userId);
     }
 
-    @GetMapping("/posts/{id}")
+    @GetMapping("/post/{id}")
     public Post findOneId(@PathVariable long id) {
         Post post = postService.findOneById(id);
         if (post == null) {
@@ -52,7 +53,7 @@ public class PostController {
         return post;
     }
 
-    @GetMapping("/posts/{postId}/comments")
+    @GetMapping("/post/{postId}/comment")
     public List<Comment> findAllCommentsByPostId(@PathVariable long postId) {
         if (postService.findOneById(postId) == null) {
             throw new ResponseStatusException(
@@ -62,7 +63,7 @@ public class PostController {
         return commentService.findAllByPostId(postId);
     }
 
-    @PostMapping("/posts")
+    @PostMapping("/post")
     public Boolean save(@RequestBody Map<String, String> body) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         long userId = userService.findByUsername(userDetails.getUsername()).getId();
